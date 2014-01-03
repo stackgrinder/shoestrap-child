@@ -51,3 +51,16 @@ function shoestrap_child_load_stylesheet() {
 }
 // Uncomment the line below to enqueue the stylesheet
 // add_action('wp_enqueue_scripts', 'shoestrap_child_load_stylesheet', 100);
+
+
+/*
+ * Remove page titles
+ */
+function shoestrap_empty_page_title() {}
+
+function shoestrap_remove_page_titles() {
+	if ( shoestrap_getvariable( 'remove_page_titles' ) == 1 ) :
+		add_action( 'shoestrap_page_header_override', 'shoestrap_empty_page_title' );
+	endif;
+}
+add_action( 'wp', 'shoestrap_remove_page_titles' );
