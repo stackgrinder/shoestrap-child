@@ -9,7 +9,8 @@
  * You can learn more about fields here: https://github.com/ReduxFramework/ReduxFramework/wiki/Fields
  */
 
-add_filter( 'redux-sections-' . REDUX_OPT_NAME, 'shoestrap_child_options', 16 );
+// add_filter( 'redux/options/' . REDUX_OPT_NAME . '/sections', 'shoestrap_child_options', 16 );
+
 if ( !function_exists( 'shoestrap_child_options' ) ) :
 function shoestrap_child_options( $sections ) {
 
