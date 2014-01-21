@@ -54,6 +54,16 @@ function shoestrap_child_load_stylesheet() {
 
 
 /*
+ * Enqueue the stylesheet created with Grunt
+ */
+function shoestrap_child_grunt_stylesheet() {
+	wp_enqueue_style( 'shoestrap_child_grunt_css', get_stylesheet_directory_uri() . '/assets/css/style.css', false, null );
+}
+// Uncomment the line below to enqueue the stylesheet
+// add_action('wp_enqueue_scripts', 'shoestrap_child_grunt_stylesheet', 100);
+
+
+/*
  * Remove page titles
  */
 function shoestrap_empty_page_title() {}
