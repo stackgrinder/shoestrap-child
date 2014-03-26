@@ -1,21 +1,7 @@
 <?php
 
-if ( !defined( 'REDUX_OPT_NAME' ) )
-	define( 'REDUX_OPT_NAME', 'shoestrap' );
-
-// Prioritize loading of some necessary core modules
-if ( file_exists( get_template_directory() . '/lib/modules/redux/module.php' ) ) :
-	require_once get_template_directory() . '/lib/modules/redux/module.php';
-endif;
-if ( file_exists( get_template_directory() . '/lib/modules/core/module.php' ) ) :
-	require_once get_template_directory() . '/lib/modules/core/module.php';
-endif;
-if ( file_exists( get_template_directory() . '/lib/modules/layout/module.php' ) ) :
-	require_once get_template_directory() . '/lib/modules/layout/module.php';
-endif;
-if ( file_exists( get_template_directory() . '/lib/modules/blog/module.php' ) ) :
-	require_once get_template_directory() . '/lib/modules/blog/module.php';
-endif;
+if ( !defined( 'SHOESTRAP_OPT_NAME' ) )
+	define( 'SHOESTRAP_OPT_NAME', 'shoestrap' );
 
 // Include some admin options.
 require_once locate_template( 'lib/admin-options.php' );
@@ -30,7 +16,6 @@ function shoestrap_child_styles( $bootstrap ) {
 	@import "' . get_stylesheet_directory() . '/assets/less/child.less";';
 }
 
-
 /*
  * Changes the output of the compiled CSS.
  */
@@ -40,7 +25,6 @@ function shoestrap_child_hijack_compiler( $css ) {
 	return $css;
 }
 
-
 /*
  * Enqueue the style.css file.
  *
@@ -49,31 +33,17 @@ function shoestrap_child_hijack_compiler( $css ) {
  * To have styles compiled and added in the main stylesheet,
  * try using the shoestrap_child_styles() function instead,
  */
+// Uncomment the line below to enqueue the stylesheet
+// add_action('wp_enqueue_scripts', 'shoestrap_child_load_stylesheet', 100);
 function shoestrap_child_load_stylesheet() {
 	wp_enqueue_style( 'shoestrap_child_css', get_stylesheet_uri(), false, null );
 }
-// Uncomment the line below to enqueue the stylesheet
-// add_action('wp_enqueue_scripts', 'shoestrap_child_load_stylesheet', 100);
-
 
 /*
  * Enqueue the stylesheet created with Grunt
  */
+// Uncomment the line below to enqueue the stylesheet
+// add_action('wp_enqueue_scripts', 'shoestrap_child_grunt_stylesheet', 100);
 function shoestrap_child_grunt_stylesheet() {
 	wp_enqueue_style( 'shoestrap_child_grunt_css', get_stylesheet_directory_uri() . '/assets/css/style.css', false, null );
 }
-// Uncomment the line below to enqueue the stylesheet
-// add_action('wp_enqueue_scripts', 'shoestrap_child_grunt_stylesheet', 100);
-
-
-/*
- * Remove page titles
- */
-function shoestrap_empty_page_title() {}
-
-function shoestrap_remove_page_titles() {
-	if ( shoestrap_getvariable( 'remove_page_titles' ) == 1 ) :
-		add_action( 'shoestrap_page_header_override', 'shoestrap_empty_page_title' );
-	endif;
-}
-add_action( 'wp', 'shoestrap_remove_page_titles' );
