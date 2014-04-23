@@ -18,13 +18,13 @@ function shoestrap_child_options( $sections ) {
 		'icon'  => 'el-icon-th'
 	);
 
-	// $fields[] = array( 
-	//   'title'     => __( 'Field 1', 'shoestrap_child' ),
-	//   'desc'      => '',
-	//   'id'        => 'shoestrap_child_field_one',
-	//   'default'   => 0,
-	//   'type'      => 'switch'
-	// );
+	$fields[] = array( 
+	  'title'     => __( 'Pjax', 'shoestrap_child' ),
+	  'desc'      => 'Use <a href="https://github.com/defunkt/jquery-pjax" target="_blank">PJAX</a> in link tags inside NavBars, Sibebars & Breadcrumbs. This cause a fast linear fadeToggle effect in main content. Default: OFF',
+	  'id'        => 'pjax',
+	  'default'   => 0,
+	  'type'      => 'switch'
+	);
 
 	$section['fields'] = $fields;
 

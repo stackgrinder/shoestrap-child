@@ -39,11 +39,53 @@ function shoestrap_child_load_stylesheet() {
 	wp_enqueue_style( 'shoestrap_child_css', get_stylesheet_uri(), false, null );
 }
 
-/*
- * Enqueue the stylesheet created with Grunt
- */
-// Uncomment the line below to enqueue the stylesheet
-// add_action('wp_enqueue_scripts', 'shoestrap_child_grunt_stylesheet', 100);
-function shoestrap_child_grunt_stylesheet() {
-	wp_enqueue_style( 'shoestrap_child_grunt_css', get_stylesheet_directory_uri() . '/assets/css/style.css', false, null );
+
+function shoestrap_pjax() {
+	global $ss_settings;
+	if ( $ss_settings['pjax'] == 1 ) {
+		/**
+		 * Enqueue pjax.js
+		 */
+		function shoestrap_pjax_script() {
+			wp_register_script( 'shoestrap_pjax_js', get_stylesheet_directory_uri() . '/assets/js/jquery.pjax.js', false, null, true );
+			wp_enqueue_script( 'shoestrap_pjax_js' );	
+		}
+		add_action( 'wp_enqueue_scripts', 'shoestrap_pjax_script', 101 );
+
+		/**
+		 * Open a container as a content area for PJAX
+		 */
+		function shoestrap_pjax_open_container() { ?>
+			<div id="pjax-container">
+			<?php
+		}
+		add_action( 'shoestrap_pre_wrap', 'shoestrap_pjax_open_container' );
+
+		/**
+		 * Close previous container
+		 */
+		function shoestrap_pjax_close_container() { ?>
+			</div>
+			<?php
+		}
+		add_action( 'shoestrap_pre_footer', 'shoestrap_pjax_close_container' );
+
+		/**
+		 * Our PJAX script
+		 */
+		function shoestrap_pjax_trigger_script() { ?>
+			<script>
+			var $j = jQuery.noConflict();
+
+			$j(document).on('pjax:send', function() {
+				$j('.main').fadeToggle("fast", "linear")
+			})
+			$j(document).pjax('nav a, aside a, .breadcrumb a', '#pjax-container')
+			</script>
+			<?php
+		}
+		add_action( 'wp_footer', 'shoestrap_pjax_trigger_script', 200 );
+
+	}
 }
+add_action( 'init', 'shoestrap_pjax' );
