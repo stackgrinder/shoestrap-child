@@ -34,6 +34,7 @@ function shoestrap_child_hijack_compiler( $css ) {
  * try using the shoestrap_child_styles() function instead,
  */
 // Uncomment the line below to enqueue the stylesheet
+// Use a priority greater than 100 to enqueue it after the main stylesheet
 // add_action('wp_enqueue_scripts', 'shoestrap_child_load_stylesheet', 100);
 function shoestrap_child_load_stylesheet() {
 	wp_enqueue_style( 'shoestrap_child_css', get_stylesheet_uri(), false, null );
