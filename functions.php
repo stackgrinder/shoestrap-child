@@ -43,7 +43,8 @@ function shoestrap_child_load_stylesheet() {
 
 function shoestrap_pjax() {
 	global $ss_settings;
-	if ( $ss_settings['pjax'] == 1 ) {
+	$use_pjax = (is_object($ss_settings)) ? $ss_settings['pjax'] : 0;
+	if ( $use_pjax == 1 ) {
 		/**
 		 * Enqueue pjax.js
 		 */
