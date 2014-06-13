@@ -1,0 +1,17 @@
+{
+  "name": "stackgrinder/shoestrap-child",
+  "description": "Shoestrap Child theme.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Stack Grinder",
+      "email": "admin@stackgrinder.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "type": "wordpress-theme",
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.12"
+  }
+}
